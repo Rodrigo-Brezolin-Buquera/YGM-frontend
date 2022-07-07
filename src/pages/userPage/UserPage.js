@@ -1,27 +1,22 @@
-import React, { useContext, useEffect } from 'react'
-import { GlobalStateContext } from '../../global/GlobalStateContext'
-import Header from '../../compononents/headerUser/HeaderUser'
-import UserInfo from '../../compononents/userInfo/UserInfo'
+import React, { useEffect } from 'react'
+import Header from '../../components/headerUser/HeaderUser'
+import UserInfo from '../../components/userInfo/UserInfo'
 import { MainContainer, CentralContainer, SideContainer } from './styled'
 import { useHistory } from "react-router-dom";
-import ClosedPlansInfo from '../../compononents/closedPlansInfo/ClosedPlansInfo';
-import CheckinsDone from '../../compononents/checkinsDone/CheckinsDone';
-import AvailableClasses from '../../compononents/availableClasses/AvailableClasses';
+import ClosedPlansInfo from '../../components/closedPlansInfo/ClosedPlansInfo';
+import CheckinsDone from '../../components/checkinsDone/CheckinsDone';
+import AvailableClasses from '../../components/availableClasses/AvailableClasses';
 import { useProtectedPageStudent } from '../../hooks/useProtectedPageStudent'
-import { findUser } from '../../services/users'
-import { findAllClasses } from '../../services/classes'
+
 
 const UserPage = () => {
     useProtectedPageStudent()
     const history = useHistory()
-    const { setters, states } = useContext(GlobalStateContext);
-    setters.setAdmin(false)
-    const user = states.currentUser
+   
 
     useEffect(() => {
-        findUser(setters.setCurrentUser)
-        findAllClasses(setters.setClasses) 
-    }, [states.newRender])
+        
+    }, [])
 
     return (
         <div>
@@ -33,7 +28,7 @@ const UserPage = () => {
                 </SideContainer>
 
                 <CentralContainer>
-                    {user && user.plans && user.plans.length &&
+                    {/* {user && user.plans && user.plans.length &&
                         <UserInfo
                             id={user.id}
                             name={user.name}
@@ -43,13 +38,15 @@ const UserPage = () => {
                             planEnds={user.plans[0].planEnds}
                             totalClasses={user.plans[0].totalClasses}
                             avaliableClasses={user.plans[0].avaliableClasses}
-                        />}
+                        />} */}
 
-                    <ClosedPlansInfo user={user} />
+                    <ClosedPlansInfo 
+                    //user={user} 
+                    />
                 </CentralContainer>
 
                 <SideContainer>
-                    {user && user.plans && user.plans.length && <CheckinsDone user={user} />}
+                    {/* {user && user.plans && user.plans.length && <CheckinsDone user={user} />} */}
                 </SideContainer>
             </MainContainer>
         </div>
